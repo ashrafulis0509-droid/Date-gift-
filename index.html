@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>A Little Surprise ❤️</title>
 
   <style>
@@ -14,36 +15,57 @@
 
     body {
       min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: auto;
       font-family: "Segoe UI", sans-serif;
       background: linear-gradient(135deg, #ff758c, #ff7eb3, #c471ed);
-      padding: 20px;
+      padding: 30px 15px;
+      overflow-x: hidden;
     }
 
     .hearts span {
       position: fixed;
-      bottom: -30px;
+      bottom: -40px;
       font-size: 25px;
       animation: float 7s linear infinite;
       opacity: 0.7;
       pointer-events: none;
+      z-index: 0;
     }
 
-    .hearts span:nth-child(1) { left: 10%; animation-delay: 0s; }
-    .hearts span:nth-child(2) { left: 25%; animation-delay: 2s; }
-    .hearts span:nth-child(3) { left: 45%; animation-delay: 4s; }
-    .hearts span:nth-child(4) { left: 65%; animation-delay: 1s; }
-    .hearts span:nth-child(5) { left: 82%; animation-delay: 3s; }
+    .hearts span:nth-child(1) {
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .hearts span:nth-child(2) {
+      left: 25%;
+      animation-delay: 2s;
+    }
+
+    .hearts span:nth-child(3) {
+      left: 45%;
+      animation-delay: 4s;
+    }
+
+    .hearts span:nth-child(4) {
+      left: 65%;
+      animation-delay: 1s;
+    }
+
+    .hearts span:nth-child(5) {
+      left: 82%;
+      animation-delay: 3s;
+    }
 
     @keyframes float {
       0% {
         transform: translateY(0) rotate(0deg);
         opacity: 0;
       }
-      20% { opacity: 0.8; }
+
+      20% {
+        opacity: 0.8;
+      }
+
       100% {
         transform: translateY(-110vh) rotate(360deg);
         opacity: 0;
@@ -52,7 +74,8 @@
 
     .card {
       width: min(430px, 100%);
-      background: rgba(255,255,255,0.95);
+      margin: auto;
+      background: rgba(255,255,255,0.96);
       border-radius: 28px;
       padding: 35px 25px;
       text-align: center;
@@ -64,12 +87,16 @@
     .gift {
       font-size: 75px;
       animation: bounce 1.8s infinite;
-      cursor: pointer;
     }
 
     @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-12px); }
+      0%, 100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-12px);
+      }
     }
 
     h1 {
@@ -80,8 +107,8 @@
 
     .subtitle {
       color: #666;
-      margin-bottom: 25px;
       line-height: 1.5;
+      margin-bottom: 25px;
     }
 
     .hidden-message {
@@ -94,6 +121,7 @@
         opacity: 0;
         transform: scale(0.85);
       }
+
       to {
         opacity: 1;
         transform: scale(1);
@@ -110,19 +138,34 @@
     .date-box {
       background: #fff0f5;
       border-radius: 18px;
-      padding: 18px;
+      padding: 20px 15px;
       margin: 20px 0;
     }
 
     .date-box p {
-      margin: 7px 0;
+      margin: 8px 0;
       color: #555;
+    }
+
+    .date-box input {
+      width: 92%;
+      padding: 12px;
+      margin: 7px 0 15px;
+      border: 2px solid #f3a1b8;
+      border-radius: 12px;
+      font-size: 15px;
+      outline: none;
+      background: white;
+    }
+
+    .date-box input:focus {
+      border-color: #e84372;
     }
 
     .code {
       display: inline-block;
       background: #222;
-      color: #fff;
+      color: white;
       padding: 10px 15px;
       border-radius: 10px;
       letter-spacing: 2px;
@@ -141,22 +184,30 @@
       transition: 0.25s;
     }
 
+    button:hover {
+      transform: scale(1.06);
+    }
+
     .open-btn,
     .yes-btn {
       background: #e84372;
       color: white;
     }
 
-    button:hover {
-      transform: scale(1.06);
+    .confirm-btn {
+      background: #e84372;
+      color: white;
+      width: 90%;
+      margin-top: 10px;
     }
 
     .response {
       display: none;
-      margin-top: 18px;
+      margin-top: 20px;
       color: #e84372;
       font-weight: bold;
       font-size: 18px;
+      line-height: 1.7;
     }
 
     .small {
@@ -164,11 +215,19 @@
       font-size: 12px;
       color: #999;
     }
+
+    .success {
+      background: white;
+      border-radius: 15px;
+      padding: 15px;
+      margin-top: 15px;
+    }
   </style>
 </head>
 
 <body>
 
+  <!-- Floating hearts -->
   <div class="hearts">
     <span>❤️</span>
     <span>💗</span>
@@ -177,6 +236,8 @@
     <span>❤️</span>
   </div>
 
+
+  <!-- Main Card -->
   <div class="card">
 
     <div class="gift">🎁</div>
@@ -191,6 +252,8 @@
       Open Your Gift 🎀
     </button>
 
+
+    <!-- Hidden Message -->
     <div class="hidden-message" id="message">
 
       <h2>💌 It's a DATE! 💌</h2>
@@ -204,29 +267,81 @@
         delicious and make another beautiful memory. 🥹💕
       </p>
 
+
+      <!-- Date Selection -->
       <div class="date-box">
-        <p>📅 <b>Date:</b> You choose 😌</p>
-        <p>⏰ <b>Time:</b> Whenever we're both free</p>
-        <p>📍 <b>Place:</b> Our little adventure ❤️</p>
-        <p>🍕 <b>Includes:</b> Food + Fun + Unlimited Bakchodi</p>
+
+        <p>📅 <b>Choose Our Date ❤️</b></p>
+
+        <input
+          type="date"
+          id="datePicker"
+        >
+
+
+        <p>⏰ <b>Choose Our Time ❤️</b></p>
+
+        <input
+          type="time"
+          id="timePicker"
+        >
+
+
+        <p>📍 <b>Choose Our Place ❤️</b></p>
+
+        <input
+          type="text"
+          id="placePicker"
+          placeholder="Where should we go? 🥰"
+        >
+
+
+        <button
+          class="confirm-btn"
+          onclick="confirmDate()"
+        >
+          Confirm Our Date 💕
+        </button>
+
       </div>
 
+
+      <!-- Special Code -->
       <p>🎟️ Your special date code:</p>
 
       <div class="code">
-        DATE-WITH-MY-FAV
+        DATE-WITH-MY-FAV ❤️
       </div>
 
-      <br>
 
-      <button class="yes-btn" onclick="sayYes()">
-        Yes ❤️
-      </button>
+      <!-- Confirmation -->
+      <div
+        class="response"
+        id="response"
+      >
+        <div class="success">
 
-      <div class="response" id="response">
-        YAYYY! 🥹❤️<br>
-        Date officially unlocked! 🎉💕
+          🥹❤️ <b>DATE CONFIRMED!</b> ❤️🥹
+
+          <br><br>
+
+          📅 <span id="resultDate"></span>
+
+          <br>
+
+          ⏰ <span id="resultTime"></span>
+
+          <br>
+
+          📍 <span id="resultPlace"></span>
+
+          <br><br>
+
+          Can't wait to make a beautiful memory with you! 💕🥰
+
+        </div>
       </div>
+
 
       <p class="small">
         No expiry date. Some memories are worth making anytime. ✨
@@ -236,52 +351,175 @@
 
   </div>
 
+
   <script>
+
+    // Open the gift
     function openGift() {
+
       document.querySelector(".open-btn").style.display = "none";
+
       document.getElementById("message").style.display = "block";
     }
 
-    function sayYes() {
-      document.getElementById("response").style.display = "block";
+
+    // Confirm selected date
+    function confirmDate() {
+
+      const date =
+        document.getElementById("datePicker").value;
+
+      const time =
+        document.getElementById("timePicker").value;
+
+      const place =
+        document.getElementById("placePicker").value.trim();
+
+
+      // Check everything is filled
+      if (!date || !time || !place) {
+
+        alert(
+          "Please choose the date, time and place first ❤️"
+        );
+
+        return;
+      }
+
+
+      // Convert date into beautiful format
+      const selectedDate =
+        new Date(date + "T00:00:00");
+
+      const formattedDate =
+        selectedDate.toLocaleDateString(
+          "en-IN",
+          {
+            day: "numeric",
+            month: "long",
+            year: "numeric"
+          }
+        );
+
+
+      // Convert time
+      const timeParts = time.split(":");
+
+      let hour = parseInt(timeParts[0]);
+
+      const minutes = timeParts[1];
+
+      const ampm = hour >= 12 ? "PM" : "AM";
+
+      hour = hour % 12;
+
+      hour = hour ? hour : 12;
+
+      const formattedTime =
+        hour + ":" + minutes + " " + ampm;
+
+
+      // Show result
+      document.getElementById("resultDate").innerText =
+        formattedDate;
+
+      document.getElementById("resultTime").innerText =
+        formattedTime;
+
+      document.getElementById("resultPlace").innerText =
+        place;
+
+
+      document.getElementById("response").style.display =
+        "block";
+
+
+      // Little heart celebration
+      createHearts();
+
+      // Scroll to confirmation
+      setTimeout(function() {
+
+        document.getElementById("response")
+          .scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+          });
+
+      }, 200);
+
+    }
+
+
+    // Heart celebration
+    function createHearts() {
 
       for (let i = 0; i < 25; i++) {
-        const heart = document.createElement("div");
 
-        heart.innerHTML = ["❤️", "💗", "💕", "✨"][Math.floor(Math.random() * 4)];
+        const heart =
+          document.createElement("div");
+
+        heart.innerHTML =
+          ["❤️", "💗", "💕", "💖", "✨"]
+          [Math.floor(Math.random() * 5)];
 
         heart.style.position = "fixed";
-        heart.style.left = Math.random() * 100 + "vw";
+
+        heart.style.left =
+          Math.random() * 100 + "vw";
+
         heart.style.top = "80vh";
-        heart.style.fontSize = (15 + Math.random() * 25) + "px";
+
+        heart.style.fontSize =
+          (15 + Math.random() * 25) + "px";
+
         heart.style.zIndex = "10";
+
         heart.style.pointerEvents = "none";
 
         document.body.appendChild(heart);
 
+
         heart.animate(
+
           [
             {
               transform: "translateY(0) scale(1)",
               opacity: 1
             },
+
             {
               transform:
-                `translateY(-${300 + Math.random() * 400}px)
-                 rotate(${Math.random() * 360}deg)
-                 scale(1.5)`,
+                "translateY(-" +
+                (300 + Math.random() * 400) +
+                "px) rotate(" +
+                (Math.random() * 360) +
+                "deg) scale(1.5)",
+
               opacity: 0
             }
           ],
+
           {
-            duration: 1800 + Math.random() * 1200,
+            duration:
+              1800 + Math.random() * 1200,
+
             easing: "ease-out"
           }
+
         );
 
-        setTimeout(() => heart.remove(), 3200);
+
+        setTimeout(function() {
+
+          heart.remove();
+
+        }, 3200);
+
       }
+
     }
+
   </script>
 
 </body>
