@@ -1,526 +1,463 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Special Date ❤️</title>
 
-  <title>A Little Surprise ❤️</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+body{
+  min-height:100vh;
+  font-family:"Segoe UI",sans-serif;
+  background:linear-gradient(135deg,#ff758c,#ff7eb3,#c471ed);
+  padding:30px 15px;
+  overflow-x:hidden;
+}
 
-    body {
-      min-height: 100vh;
-      font-family: "Segoe UI", sans-serif;
-      background: linear-gradient(135deg, #ff758c, #ff7eb3, #c471ed);
-      padding: 30px 15px;
-      overflow-x: hidden;
-    }
+.card{
+  width:min(430px,100%);
+  margin:auto;
+  background:rgba(255,255,255,.96);
+  border-radius:28px;
+  padding:35px 25px;
+  text-align:center;
+  box-shadow:0 20px 60px rgba(0,0,0,.25);
+  position:relative;
+  z-index:2;
+}
 
-    .hearts span {
-      position: fixed;
-      bottom: -40px;
-      font-size: 25px;
-      animation: float 7s linear infinite;
-      opacity: 0.7;
-      pointer-events: none;
-      z-index: 0;
-    }
+.gift{
+  font-size:75px;
+  animation:bounce 1.8s infinite;
+}
 
-    .hearts span:nth-child(1) {
-      left: 10%;
-      animation-delay: 0s;
-    }
+@keyframes bounce{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-12px)}
+}
 
-    .hearts span:nth-child(2) {
-      left: 25%;
-      animation-delay: 2s;
-    }
+h1{
+  color:#e84372;
+  margin:15px 0 10px;
+  font-size:30px;
+}
 
-    .hearts span:nth-child(3) {
-      left: 45%;
-      animation-delay: 4s;
-    }
+.subtitle{
+  color:#666;
+  line-height:1.5;
+  margin-bottom:25px;
+}
 
-    .hearts span:nth-child(4) {
-      left: 65%;
-      animation-delay: 1s;
-    }
+.hidden-message{
+  display:none;
+  animation:appear .8s ease;
+}
 
-    .hearts span:nth-child(5) {
-      left: 82%;
-      animation-delay: 3s;
-    }
+@keyframes appear{
+  from{opacity:0;transform:scale(.85)}
+  to{opacity:1;transform:scale(1)}
+}
 
-    @keyframes float {
-      0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 0;
-      }
+.message{
+  color:#444;
+  line-height:1.7;
+  margin:15px 0;
+}
 
-      20% {
-        opacity: 0.8;
-      }
+.date-box{
+  background:#fff0f5;
+  border-radius:18px;
+  padding:20px 15px;
+  margin:20px 0;
+}
 
-      100% {
-        transform: translateY(-110vh) rotate(360deg);
-        opacity: 0;
-      }
-    }
+.date-box p{
+  margin:8px 0;
+  color:#555;
+}
 
-    .card {
-      width: min(430px, 100%);
-      margin: auto;
-      background: rgba(255,255,255,0.96);
-      border-radius: 28px;
-      padding: 35px 25px;
-      text-align: center;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
-      position: relative;
-      z-index: 2;
-    }
+input{
+  width:92%;
+  padding:12px;
+  margin:7px 0 15px;
+  border:2px solid #f3a1b8;
+  border-radius:12px;
+  font-size:15px;
+  outline:none;
+  background:white;
+}
 
-    .gift {
-      font-size: 75px;
-      animation: bounce 1.8s infinite;
-    }
+input:focus{
+  border-color:#e84372;
+}
 
-    @keyframes bounce {
-      0%, 100% {
-        transform: translateY(0);
-      }
+button{
+  border:none;
+  border-radius:30px;
+  padding:13px 28px;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+  margin:5px;
+  transition:.25s;
+}
 
-      50% {
-        transform: translateY(-12px);
-      }
-    }
+button:hover{
+  transform:scale(1.06);
+}
 
-    h1 {
-      color: #e84372;
-      margin: 15px 0 10px;
-      font-size: 30px;
-    }
+.open-btn,
+.confirm-btn{
+  background:#e84372;
+  color:white;
+}
 
-    .subtitle {
-      color: #666;
-      line-height: 1.5;
-      margin-bottom: 25px;
-    }
+.confirm-btn{
+  width:90%;
+}
 
-    .hidden-message {
-      display: none;
-      animation: appear 0.8s ease;
-    }
+.code{
+  display:inline-block;
+  background:#222;
+  color:white;
+  padding:10px 15px;
+  border-radius:10px;
+  letter-spacing:2px;
+  font-weight:bold;
+  margin:10px 0 20px;
+}
 
-    @keyframes appear {
-      from {
-        opacity: 0;
-        transform: scale(0.85);
-      }
+.response{
+  display:none;
+  margin-top:20px;
+  color:#e84372;
+  font-weight:bold;
+  font-size:18px;
+  line-height:1.7;
+}
 
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
+.success{
+  background:white;
+  border-radius:15px;
+  padding:15px;
+}
 
-    .message {
-      color: #444;
-      line-height: 1.7;
-      margin: 15px 0;
-      font-size: 16px;
-    }
+.small{
+  margin-top:20px;
+  font-size:12px;
+  color:#999;
+}
 
-    .date-box {
-      background: #fff0f5;
-      border-radius: 18px;
-      padding: 20px 15px;
-      margin: 20px 0;
-    }
+.hearts span{
+  position:fixed;
+  bottom:-40px;
+  font-size:25px;
+  animation:float 7s linear infinite;
+  opacity:.7;
+  pointer-events:none;
+}
 
-    .date-box p {
-      margin: 8px 0;
-      color: #555;
-    }
+.hearts span:nth-child(1){left:10%;animation-delay:0s}
+.hearts span:nth-child(2){left:25%;animation-delay:2s}
+.hearts span:nth-child(3){left:45%;animation-delay:4s}
+.hearts span:nth-child(4){left:65%;animation-delay:1s}
+.hearts span:nth-child(5){left:82%;animation-delay:3s}
 
-    .date-box input {
-      width: 92%;
-      padding: 12px;
-      margin: 7px 0 15px;
-      border: 2px solid #f3a1b8;
-      border-radius: 12px;
-      font-size: 15px;
-      outline: none;
-      background: white;
-    }
-
-    .date-box input:focus {
-      border-color: #e84372;
-    }
-
-    .code {
-      display: inline-block;
-      background: #222;
-      color: white;
-      padding: 10px 15px;
-      border-radius: 10px;
-      letter-spacing: 2px;
-      font-weight: bold;
-      margin: 10px 0 20px;
-    }
-
-    button {
-      border: none;
-      border-radius: 30px;
-      padding: 13px 28px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      margin: 5px;
-      transition: 0.25s;
-    }
-
-    button:hover {
-      transform: scale(1.06);
-    }
-
-    .open-btn,
-    .yes-btn {
-      background: #e84372;
-      color: white;
-    }
-
-    .confirm-btn {
-      background: #e84372;
-      color: white;
-      width: 90%;
-      margin-top: 10px;
-    }
-
-    .response {
-      display: none;
-      margin-top: 20px;
-      color: #e84372;
-      font-weight: bold;
-      font-size: 18px;
-      line-height: 1.7;
-    }
-
-    .small {
-      margin-top: 20px;
-      font-size: 12px;
-      color: #999;
-    }
-
-    .success {
-      background: white;
-      border-radius: 15px;
-      padding: 15px;
-      margin-top: 15px;
-    }
-  </style>
+@keyframes float{
+  0%{transform:translateY(0);opacity:0}
+  20%{opacity:.8}
+  100%{transform:translateY(-110vh) rotate(360deg);opacity:0}
+}
+</style>
 </head>
 
 <body>
 
-  <!-- Floating hearts -->
-  <div class="hearts">
-    <span>❤️</span>
-    <span>💗</span>
-    <span>💕</span>
-    <span>💖</span>
-    <span>❤️</span>
-  </div>
+<div class="hearts">
+<span>❤️</span>
+<span>💗</span>
+<span>💕</span>
+<span>💖</span>
+<span>❤️</span>
+</div>
+
+<div class="card">
+
+<div class="gift">🎁</div>
+
+<h1>A Little Surprise For You 💕</h1>
+
+<p class="subtitle">
+Someone has prepared a very special gift just for you... 🥰
+</p>
+
+<button class="open-btn" onclick="openGift()">
+Open Your Gift 🎀
+</button>
+
+<div class="hidden-message" id="message">
+
+<h2>💌 It's a DATE! 💌</h2>
+
+<p class="message">
+Hey you ❤️<br><br>
+This isn't an ordinary gift card.
+It's an invitation to spend some lovely time together,
+laugh a lot, eat something delicious and make another
+beautiful memory. 🥹💕
+</p>
+
+<form
+  id="dateForm"
+  action="https://formspree.io/f/xkjnneqy"
+  method="POST"
+>
+
+<div class="date-box">
+
+<p>📅 <b>Choose Our Date ❤️</b></p>
+
+<input
+  type="date"
+  name="date"
+  id="datePicker"
+  required
+>
+
+<p>⏰ <b>Choose Our Time ❤️</b></p>
+
+<input
+  type="time"
+  name="time"
+  id="timePicker"
+  required
+>
+
+<p>📍 <b>Choose Our Place ❤️</b></p>
+
+<input
+  type="text"
+  name="place"
+  id="placePicker"
+  placeholder="Where should we go? 🥰"
+  required
+>
+
+<input
+  type="hidden"
+  name="subject"
+  value="❤️ New Date Confirmation!"
+>
+
+<button
+  type="submit"
+  class="confirm-btn"
+>
+Confirm Our Date 💕
+</button>
+
+</div>
+
+</form>
+
+<p>🎟️ Your special date code:</p>
+
+<div class="code">
+DATE-WITH-MY-FAV ❤️
+</div>
+
+<div class="response" id="response">
+
+<div class="success">
+
+🥹❤️ <b>DATE CONFIRMED!</b> ❤️🥹
+
+<br><br>
+
+Your date has been sent successfully! 💌
+
+<br><br>
+
+📅 <span id="resultDate"></span><br>
+⏰ <span id="resultTime"></span><br>
+📍 <span id="resultPlace"></span>
+
+<br><br>
+
+Can't wait to make a beautiful memory with you! 💕🥰
+
+</div>
+
+</div>
+
+<p class="small">
+No expiry date. Some memories are worth making anytime. ✨
+</p>
+
+</div>
+
+</div>
+
+<script>
+
+function openGift(){
+
+  document.querySelector(".open-btn").style.display="none";
+
+  document.getElementById("message").style.display="block";
+}
 
 
-  <!-- Main Card -->
-  <div class="card">
+document
+.getElementById("dateForm")
+.addEventListener("submit", async function(event){
 
-    <div class="gift">🎁</div>
+  event.preventDefault();
 
-    <h1>A Little Surprise For You 💕</h1>
+  const form=this;
 
-    <p class="subtitle">
-      Someone has prepared a very special gift just for you...
-    </p>
+  const date=document.getElementById("datePicker").value;
+  const time=document.getElementById("timePicker").value;
+  const place=document.getElementById("placePicker").value.trim();
 
-    <button class="open-btn" onclick="openGift()">
-      Open Your Gift 🎀
-    </button>
+  if(!date || !time || !place){
 
+    alert("Please choose the date, time and place first ❤️");
 
-    <!-- Hidden Message -->
-    <div class="hidden-message" id="message">
+    return;
+  }
 
-      <h2>💌 It's a DATE! 💌</h2>
+  const selectedDate=new Date(date+"T00:00:00");
 
-      <p class="message">
-        Hey you ❤️<br><br>
+  const formattedDate=
+    selectedDate.toLocaleDateString("en-IN",{
+      day:"numeric",
+      month:"long",
+      year:"numeric"
+    });
 
-        This isn't an ordinary gift card.
-        It's an invitation to spend some lovely
-        time together, laugh a lot, eat something
-        delicious and make another beautiful memory. 🥹💕
-      </p>
+  const parts=time.split(":");
 
+  let hour=parseInt(parts[0]);
 
-      <!-- Date Selection -->
-      <div class="date-box">
+  const minutes=parts[1];
 
-        <p>📅 <b>Choose Our Date ❤️</b></p>
+  const ampm=hour>=12?"PM":"AM";
 
-        <input
-          type="date"
-          id="datePicker"
-        >
+  hour=hour%12;
 
+  hour=hour?hour:12;
 
-        <p>⏰ <b>Choose Our Time ❤️</b></p>
-
-        <input
-          type="time"
-          id="timePicker"
-        >
+  const formattedTime=
+    hour+":"+minutes+" "+ampm;
 
 
-        <p>📍 <b>Choose Our Place ❤️</b></p>
+  const data=new FormData(form);
 
-        <input
-          type="text"
-          id="placePicker"
-          placeholder="Where should we go? 🥰"
-        >
+  try{
 
-
-        <button
-          class="confirm-btn"
-          onclick="confirmDate()"
-        >
-          Confirm Our Date 💕
-        </button>
-
-      </div>
-
-
-      <!-- Special Code -->
-      <p>🎟️ Your special date code:</p>
-
-      <div class="code">
-        DATE-WITH-MY-FAV ❤️
-      </div>
-
-
-      <!-- Confirmation -->
-      <div
-        class="response"
-        id="response"
-      >
-        <div class="success">
-
-          🥹❤️ <b>DATE CONFIRMED!</b> ❤️🥹
-
-          <br><br>
-
-          📅 <span id="resultDate"></span>
-
-          <br>
-
-          ⏰ <span id="resultTime"></span>
-
-          <br>
-
-          📍 <span id="resultPlace"></span>
-
-          <br><br>
-
-          Can't wait to make a beautiful memory with you! 💕🥰
-
-        </div>
-      </div>
-
-
-      <p class="small">
-        No expiry date. Some memories are worth making anytime. ✨
-      </p>
-
-    </div>
-
-  </div>
-
-
-  <script>
-
-    // Open the gift
-    function openGift() {
-
-      document.querySelector(".open-btn").style.display = "none";
-
-      document.getElementById("message").style.display = "block";
-    }
-
-
-    // Confirm selected date
-    function confirmDate() {
-
-      const date =
-        document.getElementById("datePicker").value;
-
-      const time =
-        document.getElementById("timePicker").value;
-
-      const place =
-        document.getElementById("placePicker").value.trim();
-
-
-      // Check everything is filled
-      if (!date || !time || !place) {
-
-        alert(
-          "Please choose the date, time and place first ❤️"
-        );
-
-        return;
+    const response=await fetch(form.action,{
+      method:"POST",
+      body:data,
+      headers:{
+        "Accept":"application/json"
       }
+    });
 
+    if(response.ok){
 
-      // Convert date into beautiful format
-      const selectedDate =
-        new Date(date + "T00:00:00");
-
-      const formattedDate =
-        selectedDate.toLocaleDateString(
-          "en-IN",
-          {
-            day: "numeric",
-            month: "long",
-            year: "numeric"
-          }
-        );
-
-
-      // Convert time
-      const timeParts = time.split(":");
-
-      let hour = parseInt(timeParts[0]);
-
-      const minutes = timeParts[1];
-
-      const ampm = hour >= 12 ? "PM" : "AM";
-
-      hour = hour % 12;
-
-      hour = hour ? hour : 12;
-
-      const formattedTime =
-        hour + ":" + minutes + " " + ampm;
-
-
-      // Show result
-      document.getElementById("resultDate").innerText =
+      document.getElementById("resultDate").innerText=
         formattedDate;
 
-      document.getElementById("resultTime").innerText =
+      document.getElementById("resultTime").innerText=
         formattedTime;
 
-      document.getElementById("resultPlace").innerText =
+      document.getElementById("resultPlace").innerText=
         place;
 
-
-      document.getElementById("response").style.display =
+      document.getElementById("response").style.display=
         "block";
 
+      form.style.display="none";
 
-      // Little heart celebration
+      document.getElementById("response")
+        .scrollIntoView({
+          behavior:"smooth",
+          block:"center"
+        });
+
       createHearts();
 
-      // Scroll to confirmation
-      setTimeout(function() {
+    }else{
 
-        document.getElementById("response")
-          .scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-          });
-
-      }, 200);
+      alert(
+        "Something went wrong. Please try again ❤️"
+      );
 
     }
 
+  }catch(error){
 
-    // Heart celebration
-    function createHearts() {
+    alert(
+      "Internet connection problem. Please try again ❤️"
+    );
 
-      for (let i = 0; i < 25; i++) {
+  }
 
-        const heart =
-          document.createElement("div");
-
-        heart.innerHTML =
-          ["❤️", "💗", "💕", "💖", "✨"]
-          [Math.floor(Math.random() * 5)];
-
-        heart.style.position = "fixed";
-
-        heart.style.left =
-          Math.random() * 100 + "vw";
-
-        heart.style.top = "80vh";
-
-        heart.style.fontSize =
-          (15 + Math.random() * 25) + "px";
-
-        heart.style.zIndex = "10";
-
-        heart.style.pointerEvents = "none";
-
-        document.body.appendChild(heart);
+});
 
 
-        heart.animate(
+function createHearts(){
 
-          [
-            {
-              transform: "translateY(0) scale(1)",
-              opacity: 1
-            },
+  for(let i=0;i<25;i++){
 
-            {
-              transform:
-                "translateY(-" +
-                (300 + Math.random() * 400) +
-                "px) rotate(" +
-                (Math.random() * 360) +
-                "deg) scale(1.5)",
+    const heart=document.createElement("div");
 
-              opacity: 0
-            }
-          ],
+    heart.innerHTML=
+      ["❤️","💗","💕","💖","✨"]
+      [Math.floor(Math.random()*5)];
 
-          {
-            duration:
-              1800 + Math.random() * 1200,
+    heart.style.position="fixed";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.top="80vh";
+    heart.style.fontSize=
+      (15+Math.random()*25)+"px";
+    heart.style.zIndex="10";
+    heart.style.pointerEvents="none";
 
-            easing: "ease-out"
-          }
+    document.body.appendChild(heart);
 
-        );
-
-
-        setTimeout(function() {
-
-          heart.remove();
-
-        }, 3200);
-
+    heart.animate(
+      [
+        {
+          transform:"translateY(0) scale(1)",
+          opacity:1
+        },
+        {
+          transform:
+            "translateY(-"+(300+Math.random()*400)+
+            "px) rotate("+Math.random()*360+
+            "deg) scale(1.5)",
+          opacity:0
+        }
+      ],
+      {
+        duration:1800+Math.random()*1200,
+        easing:"ease-out"
       }
+    );
 
-    }
+    setTimeout(()=>{
+      heart.remove();
+    },3200);
 
-  </script>
+  }
+
+}
+
+</script>
 
 </body>
 </html>
